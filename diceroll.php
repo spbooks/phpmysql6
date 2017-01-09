@@ -1,12 +1,16 @@
 <?php
 
-$roll = rand(1, 6);
+$roll = 0;
+while ($roll != 6) {
+  $roll = rand(1, 6);
+  echo '<p>You rolled a ' . $roll . '</p>';
 
-echo 'You rolled a ' . $roll;
 
-
-if ($roll == 6) {
-  echo 'You win!';
+  if ($roll == 6) {
+    echo '<p>You win!</p>';
+  }
+  else {
+    echo '<p>Sorry, you didn\'t win, better luck next time!</p>';
+  }
 }
-
 ?>
