@@ -4,7 +4,7 @@ $roll = rand(1, 6);
 echo '<p>You rolled a ' . $roll . '</p>';
 
 
-if ($roll == 6 || $roll == 5) {
+if ($roll > 4) {
   echo '<p>You win!</p>';
 }
 else {
