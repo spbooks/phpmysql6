@@ -1,10 +1,11 @@
 <?php
-$roll = rand(1, 6);
+$roll1 = rand(1, 6);
+$roll2 = rand(1, 6);
 
-echo '<p>You rolled a ' . $roll . '</p>';
+echo '<p>You rolled a ' . $roll1 . ' and a ' . $roll2 . '</p>';
 
 
-if ($roll > 4) {
+if ($roll1 == 6 && $roll2 == 6) {
   echo '<p>You win!</p>';
 }
 else {
