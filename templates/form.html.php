@@ -6,7 +6,7 @@
 		<meta charset="utf-8">	
 	</head>
 	<body>
-	<form action="name.php" method="post">
+	<form action="" method="post">
 	  	<label for="firstname">First name:</label>
 	    <input type="text" name="firstname" id="firstname">
 	  	
