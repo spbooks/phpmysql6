@@ -1,6 +1,6 @@
 <?php
-
 try {
+
   $pdo = new PDO('mysql:host=localhost;dbname=ijdb_sample;charset=utf8', 'ijdb_sample', 'mypassword');
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -15,7 +15,8 @@ try {
   $output = 'Joke table successfully created.';
 }
 catch (PDOException $e) {
-  $output = 'Database error: ' . $e->getMessage();
+  $output = 'Unable to connect to the database server: ' . $e->getMessage() . ' in ' .
+  $e->getFile() . ':' . $e->getLine();
 }
 
     
