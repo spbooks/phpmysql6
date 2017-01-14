@@ -15,7 +15,7 @@ try {
   $output = 'Joke table successfully created.';
 }
 catch (PDOException $e) {
-  $output = 'Unable to connect to the database server: ' . $e->getMessage() . ' in ' .
+  $output = 'Database error: ' . $e->getMessage() . ' in ' .
   $e->getFile() . ':' . $e->getLine();
 }
 
