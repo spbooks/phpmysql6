@@ -4,7 +4,6 @@ try {
   $pdo = new PDO('mysql:host=localhost;dbname=ijdb_sample;charset=utf8', 'ijdb_sample', 'mypassword');
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-
   $sql = 'SELECT joketext FROM joke';
   $result = $pdo->query($sql);
 
@@ -14,15 +13,11 @@ try {
 
   $title = 'Joke list';
 
-  $output = '';
+  ob_start();
 
-  foreach ($jokes as $joke) {
-    $output .= '<blockquote>';
-    $output .= '<p>';
-    $output .= $joke;
-    $output .= '</p>';
-    $output .= '</blockquote>';
-  }
+  include '../templates/jokes.html.php';
+
+  $output = ob_get_clean();
 
 }
 catch (PDOException $e) {
