@@ -12,10 +12,24 @@ try {
      $jokes[] = $row['joketext'];
   }
 
+  $title = 'Joke list';
+
+  $output = '';
+
+  foreach ($jokes as $joke) {
+    $output .= '<blockquote>';
+    $output .= '<p>';
+    $output .= $joke;
+    $output .= '</p>';
+    $output .= '</blockquote>';
+  }
+
 }
 catch (PDOException $e) {
-  $output = 'Unable to connect to the database server: ' . $e->getMessage() . ' in ' .
+  $title = 'An error has occurred';
+
+  $output = 'Database error: ' . $e->getMessage() . ' in ' .
   $e->getFile() . ':' . $e->getLine();
 }
 
-include '../templates/jokes.html.php';
+include '../templates/layout.html.php';
