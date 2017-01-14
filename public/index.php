@@ -5,16 +5,17 @@ try {
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-  $sql = 'UPDATE joke SET jokedate="2012-04-01"
-      WHERE joketext LIKE "%programmer%"';
+  $sql = 'SELECT joketext FROM joke';
+  $result = $pdo->query($sql);
 
-  $affectedRows = $pdo->exec($sql);
+  while ($row = $result->fetch()) {
+     $jokes[] = $row['joketext'];
+  }
 
-  $output = 'Updated ' . $affectedRows .' rows.';
 }
 catch (PDOException $e) {
-  $output = 'Database error: ' . $e->getMessage();
+  $output = 'Unable to connect to the database server: ' . $e->getMessage() . ' in ' .
+  $e->getFile() . ':' . $e->getLine();
 }
 
-    
-include '../templates/output.html.php';
+include '../templates/jokes.html.php';
