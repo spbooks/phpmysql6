@@ -8,4 +8,4 @@ catch (PDOException $e) {
   $output = 'Unable to connect to the database server: ' . $e;
 }
 
-include '../templates/output.html.php';
+include  __DIR__ . '/../templates/output.html.php';
