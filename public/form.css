@@ -3,3 +3,8 @@ input, label, select, textarea {float: left; width: 15em; margin-bottom: 1em;  p
 label {clear: left; padding: 0; margin: 0;}
 input[type="submit"] {margin-left: 15em; width: auto; padding: 0.5em 1em; clear: both; font-size: 1em;}
 form {overflow: auto; clear: both; display: block;}
+
+blockquote {overflow: auto;  border-bottom: 1px solid #ddd}
+blockquote p {float: left;}
+blockquote form { float: right; display: block; clear: none;}
+
