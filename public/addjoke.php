@@ -30,8 +30,8 @@ else {
 
   ob_start();
 
-  include '../templates/addjoke.html.php';
+  include  __DIR__ . '/../templates/addjoke.html.php';
 
   $output = ob_get_clean();
 }
-include '../templates/layout.html.php';
+include  __DIR__ . '/../templates/layout.html.php';
