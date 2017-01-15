@@ -32,4 +32,4 @@ catch (PDOException $e) {
   $e->getFile() . ':' . $e->getLine();
 }
 
-include '../templates/layout.html.php';
+include  __DIR__ . '/../templates/layout.html.php';
