@@ -18,4 +18,4 @@ catch (PDOException $e) {
   $e->getFile() . ':' . $e->getLine();
 }
 
-include '../templates/jokes.html.php';
+include  __DIR__ . '/../templates/jokes.html.php';
