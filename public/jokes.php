@@ -15,7 +15,7 @@ try {
 
   ob_start();
 
-  include '../templates/jokes.html.php';
+  include  __DIR__ . '/../templates/jokes.html.php';
 
   $output = ob_get_clean();
 
@@ -27,4 +27,4 @@ catch (PDOException $e) {
   $e->getFile() . ':' . $e->getLine();
 }
 
-include '../templates/layout.html.php';
+include  __DIR__ . '/../templates/layout.html.php';
