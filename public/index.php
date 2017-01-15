@@ -9,4 +9,4 @@ catch (PDOException $e) {
   $e->getFile() . ':' . $e->getLine();
 }
 
-include '../templates/output.html.php';
+include  __DIR__ . '/../templates/output.html.php';
