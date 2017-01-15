@@ -20,4 +20,4 @@ catch (PDOException $e) {
 }
 
     
-include '../templates/output.html.php';
+include  __DIR__ . '/../templates/output.html.php';
