@@ -31,6 +31,11 @@ try {
 	$pdo->query('CREATE DATABASE ijdb_sample');
 	$pdo->query('GRANT ALL PRIVILEGES ON ijdb_sample.* To \'ijdb_sample\'@\'localhost\'');
 	$pdo->query('FLUSH PRIVILEGES');
+	$pdo->query('USE ijdb_sample');
+
+	if (file_exists('../../database.sql')) {
+		$pdo->exec(file_get_contents('../../database.sql'));
+	}
 
 }
 catch (PDOException $e) {
