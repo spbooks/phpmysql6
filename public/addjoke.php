@@ -1,8 +1,7 @@
 <?php
 if (isset($_POST['joketext'])) {
   try {
-      $pdo = new PDO('mysql:host=localhost;dbname=ijdb_sample;charset=utf8', 'ijdb_sample', 'mypassword');
-      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      include __DIR__ . '/../includes/DatabaseConnection.php';
 
       $sql = 'INSERT INTO `joke` SET
               `joketext` = :joketext,
@@ -14,7 +13,7 @@ if (isset($_POST['joketext'])) {
 
       $stmt->execute();
 
-      header('location: jokes.php');
+    //  header('location: jokes.php');
       
   }
   catch (PDOException $e) {
