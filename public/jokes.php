@@ -2,6 +2,7 @@
 
 try {
   include __DIR__ . '/../includes/DatabaseConnection.php';
+  include __DIR__ . '/../includes/DatabaseFunctions.php';
 
   $sql = 'SELECT `joke`.`id`, `joketext`, `name`, `email`
           FROM `joke` INNER JOIN `author`
@@ -11,6 +12,8 @@ try {
 
 
   $title = 'Joke list';
+
+  $totalJokes = totalJokes($pdo);
 
   ob_start();
 
