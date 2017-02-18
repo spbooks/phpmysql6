@@ -4,9 +4,9 @@ if (isset($_POST['joketext'])) {
       $pdo = new PDO('mysql:host=localhost;dbname=ijdb_sample;charset=utf8', 'ijdb_sample', 'mypassword');
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-      $sql = 'INSERT INTO joke SET
-              joketext = :joketext,
-              jokedate = CURDATE()';
+      $sql = 'INSERT INTO `joke` SET
+              `joketext` = :joketext,
+              `jokedate` = CURDATE()';
 
       $stmt = $pdo->prepare($sql);
 

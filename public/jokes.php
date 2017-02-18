@@ -6,7 +6,7 @@ try {
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-  $sql = 'SELECT joketext, id FROM joke';
+  $sql = 'SELECT `joketext`, `id` FROM `joke`';
  
   $jokes = $pdo->query($sql);
 
