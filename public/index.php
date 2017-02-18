@@ -5,8 +5,8 @@ try {
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-  $sql = 'UPDATE joke SET jokedate="2012-04-01"
-      WHERE joketext LIKE "%programmer%"';
+  $sql = 'UPDATE `joke` SET `jokedate`="2012-04-01"
+      WHERE `joketext` LIKE "%programmer%"';
 
   $affectedRows = $pdo->exec($sql);
 
