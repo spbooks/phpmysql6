@@ -4,9 +4,9 @@ try {
   $pdo = new PDO('mysql:host=localhost;dbname=ijdb_sample;charset=utf8', 'ijdb_sample', 'mypassword');
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  $sql = 'SELECT joke.id, joketext, name, email
-          FROM joke INNER JOIN author
-            ON authorid = author.id';
+  $sql = 'SELECT `joke`.`id`, `joketext`, `name`, `email`
+          FROM `joke` INNER JOIN `author`
+            ON `authorid` = `author`.`id`';
 
   $jokes = $pdo->query($sql);
 

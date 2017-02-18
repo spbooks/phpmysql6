@@ -5,7 +5,7 @@ try {
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-  $sql = 'DELETE FROM joke WHERE id = :id';
+  $sql = 'DELETE FROM `joke` WHERE `id` = :id';
  
   $stmt = $pdo->prepare($sql);
 
