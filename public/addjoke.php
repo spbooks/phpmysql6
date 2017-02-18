@@ -2,24 +2,17 @@
 if (isset($_POST['joketext'])) {
   try {
       include __DIR__ . '/../includes/DatabaseConnection.php';
+      include __DIR__ . '/../includes/DatabaseFunctions.php';
 
-      $sql = 'INSERT INTO `joke` SET
-              `joketext` = :joketext,
-              `jokedate` = CURDATE()';
+      insertJoke($pdo, $_POST['joketext'], 1);
 
-      $stmt = $pdo->prepare($sql);
-
-      $stmt->bindValue(':joketext', $_POST['joketext']);
-
-      $stmt->execute();
-
-    //  header('location: jokes.php');
+      header('location: jokes.php');
       
   }
   catch (PDOException $e) {
     $title = 'An error has occurred';
 
-    $output = 'DAtabase error: ' . $e->getMessage() . ' in ' .
+    $output = 'Database error: ' . $e->getMessage() . ' in ' .
     $e->getFile() . ':' . $e->getLine();
   }
 
