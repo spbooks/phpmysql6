@@ -40,11 +40,11 @@ function insertJoke($pdo, $joketext, $authorId) {
 function updateJoke($pdo, $jokeId, $joketext, $authorId) {
   $parameters = [':joketext' => $joketext, ':authorId' => $authorId, ':id' => $jokeId];
 
-  query($pdo, 'UPDATE joke SET authorId = :authorId, joketext = :joketext WHERE id = :id', $parameters);
+  query($pdo, 'UPDATE `joke` SET `authorId` = :authorId, `joketext` = :joketext WHERE `id` = :id', $parameters);
 }
 
 function deleteJoke($pdo, $id) {
   $parameters = [':id' => $id];
 
-  query($pdo, 'DELETE FROM joke WHERE id = :id', $parameters);
+  query($pdo, 'DELETE FROM `joke` WHERE `id` = :id', $parameters);
 }
