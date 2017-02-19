@@ -8,7 +8,7 @@ function query($pdo, $sql, $parameters = []) {
 
 
 function totalJokes($pdo) {
-  $query = query($pdo, 'SELECT COUNT(*) FROM joke');
+  $query = query($pdo, 'SELECT COUNT(*) FROM `joke`');
   $row = $query->fetch();
   return $row[0];
 }
