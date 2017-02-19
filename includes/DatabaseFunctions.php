@@ -1,7 +1,7 @@
 <?php
 
 function totalJokes($database) {
-	$query = $database->prepare('SELECT COUNT(*) FROM joke');
+	$query = $database->prepare('SELECT COUNT(*) FROM `joke`');
 	$query->execute();
 
 	$row = $query->fetch();
