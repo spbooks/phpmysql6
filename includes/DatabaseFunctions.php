@@ -16,7 +16,6 @@ function totalJokes($pdo) {
 
 
 function getJoke($pdo, $id) {
-	
 	//Create the array of `$parameters` for use in the `query` function
 	$parameters = [':id' => $id];
 
@@ -42,4 +41,10 @@ function updateJoke($pdo, $jokeId, $joketext, $authorId) {
   $parameters = [':joketext' => $joketext, ':authorId' => $authorId, ':id' => $jokeId];
 
   query($pdo, 'UPDATE joke SET authorId = :authorId, joketext = :joketext WHERE id = :id', $parameters);
+}
+
+function deleteJoke($pdo, $id) {
+  $parameters = [':id' => $id];
+
+  query($pdo, 'DELETE FROM joke WHERE id = :id', $parameters);
 }

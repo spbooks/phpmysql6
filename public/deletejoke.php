@@ -2,14 +2,9 @@
 
 try {
   include __DIR__ . '/../includes/DatabaseConnection.php';
+  include __DIR__ . '/../includes/DatabaseFunctions.php';
 
-
-  $sql = 'DELETE FROM `joke` WHERE `id` = :id';
- 
-  $stmt = $pdo->prepare($sql);
-
-  $stmt->bindValue(':id', $_POST['id']);
-  $stmt->execute();
+  deleteJoke($pdo, $_POST['id']);
 
   header('location: jokes.php');
 }
