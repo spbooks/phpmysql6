@@ -28,18 +28,52 @@ function getJoke($pdo, $id) {
 }
 
 
-function insertJoke($pdo, $joketext, $authorId) {
-	$query = 'INSERT INTO `joke` (`joketext`, `jokedate`, `authorId`) 
-			  VALUES (:joketext, CURDATE(), :authorId)';
+function insertJoke($pdo, $fields) {
 
-	$parameters = [':joketext' => $joketext, ':authorId' => $authorId];
+	$keys = [];
 
-	query($pdo, $query, $parameters);
+	foreach ($fields as $key => $value) {
+		$keys[] = '`' . $key . '`';
+	}
+
+	$query = 'INSERT INTO `joke` (' . implode(', ', $keys) . ') ';
+	$query .= 'VALUES (';
+
+
+	$fieldKeys = array_keys($fields);
+
+	$query .= ':' . implode(', :', $fieldKeys) . ')';
+
+
+	query($pdo, $query, $fields);
 }
 
+function updateJoke($pdo, $fields) {
 
-function updateJoke($pdo, $jokeId, $joketext, $authorId) {
-  $parameters = [':joketext' => $joketext, ':authorId' => $authorId, ':id' => $jokeId];
+	$query = ' UPDATE `joke` SET ';
 
-  query($pdo, 'UPDATE `joke` SET `authorId` = :authorId, `joketext` = :joketext WHERE `id` = :id', $parameters);
+
+	//Start off with an empty array
+	$fieldArray = [];
+
+	foreach ($fields as $key => $value) {
+		//Add, for example, `id = :id` to the end of the array
+		$fieldArray[] = '`' . $key . '` = :' . $key;
+	}
+
+
+	$query .= implode(', ', $fieldArray);
+
+
+	$query .= ' WHERE `id` = :primaryKey';
+
+	echo $query;
+
+
+	//Set the :primaryKey variable
+	$fields['primaryKey'] = $fields['id'];
+
+		var_dump($fields);
+	query($pdo, $query, $fields);
+
 }
