@@ -67,13 +67,10 @@ function updateJoke($pdo, $fields) {
 
 	$query .= ' WHERE `id` = :primaryKey';
 
-	echo $query;
-
 
 	//Set the :primaryKey variable
 	$fields['primaryKey'] = $fields['id'];
 
-		var_dump($fields);
 	query($pdo, $query, $fields);
 
 }
