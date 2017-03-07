@@ -69,11 +69,11 @@ function updateJoke($pdo, $fields) {
 
 	//Set the :primaryKey variable
 	$fields['primaryKey'] = $fields['id'];
+
 	query($pdo, $query, $fields);
-
-
-  query($pdo, 'UPDATE `joke` SET `authorId` = :authorId, `joketext` = :joketext WHERE `id` = :id', $parameters);
 }
+
+
 
 function deleteJoke($pdo, $id) {
   $parameters = [':id' => $id];
