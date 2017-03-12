@@ -53,18 +53,11 @@ function updateJoke($pdo, $fields) {
 
 	$query = ' UPDATE `joke` SET ';
 
-
-	//Start off with an empty array
-	$fieldArray = [];
-
 	foreach ($fields as $key => $value) {
-		//Add, for example, `id = :id` to the end of the array
-		$fieldArray[] = '`' . $key . '` = :' . $key;
+		$query .= '`' . $key . '` = :' . $key . ',';
 	}
 
-
-	$query .= implode(', ', $fieldArray);
-
+	$query = rtrim($query, ',');
 
 	$query .= ' WHERE `id` = :primaryKey';
 
