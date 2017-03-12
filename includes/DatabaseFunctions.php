@@ -56,9 +56,6 @@ function update($pdo, $table, $primaryKey, $fields) {
 	$query = ' UPDATE `' . $table .'` SET ';
 
 
-	//Start off with an empty array
-	$fieldArray = [];
-
 	foreach ($fields as $key => $value) {
 		$query .= '`' . $key . '` = :' . $key . ',';
 	}
