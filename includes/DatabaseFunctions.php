@@ -29,21 +29,24 @@ function getJoke($pdo, $id) {
 
 
 function insertJoke($pdo, $fields) {
-
-	$keys = [];
+	$query = 'INSERT INTO `joke` (';
 
 	foreach ($fields as $key => $value) {
-		$keys[] = '`' . $key . '`';
+		$query .= '`' . $key . '`,';
 	}
 
-	$query = 'INSERT INTO `joke` (' . implode(', ', $keys) . ') ';
-	$query .= 'VALUES (';
+	$query = rtrim($query, ',');
+
+	$query .= ') VALUES (';
 
 
-	$fieldKeys = array_keys($fields);
+	foreach ($fields as $key => $value) {
+		$query .= ':' . $key . ',';
+	}
 
-	$query .= ':' . implode(', :', $fieldKeys) . ')';
+	$query = rtrim($query, ',');
 
+	$query .= ')';
 
 	query($pdo, $query, $fields);
 }
@@ -52,17 +55,11 @@ function updateJoke($pdo, $fields) {
 
 	$query = ' UPDATE `joke` SET ';
 
-
-	//Start off with an empty array
-	$fieldArray = [];
-
 	foreach ($fields as $key => $value) {
-		//Add, for example, `id = :id` to the end of the array
-		$fieldArray[] = '`' . $key . '` = :' . $key;
+		$query .= '`' . $key . '` = :' . $key . ',';
 	}
 
-
-	$query .= implode(', ', $fieldArray);
+	$query = rtrim($query, ',');
 
 
 	$query .= ' WHERE `id` = :primaryKey';
