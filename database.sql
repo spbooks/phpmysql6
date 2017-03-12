@@ -51,7 +51,7 @@ CREATE TABLE `joke` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `joketext` text,
   `jokedate` date NOT NULL,
-  `authorid` int(11) DEFAULT NULL,
+  `authorId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

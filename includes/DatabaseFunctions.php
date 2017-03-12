@@ -7,28 +7,29 @@ function query($pdo, $sql, $parameters = []) {
 }
 
 
-function totalJokes($pdo) {
-  $query = query($pdo, 'SELECT COUNT(*) FROM `joke`');
-  $row = $query->fetch();
-  return $row[0];
+function total($pdo, $table) {
+	$query = query($pdo, 'SELECT COUNT(*) FROM `' . $table . '`');
+	$row = $query->fetch();
+	return $row[0];
 }
 
 
 
-function getJoke($pdo, $id) {
-	
-	//Create the array of `$parameters` for use in the `query` function
-	$parameters = [':id' => $id];
 
+function findById($pdo, $table, $primaryKey, $value) {
+	$query = 'SELECT * FROM `' . $table . '` WHERE `' . $primaryKey . '` = :value';
 
-	//call the query function and provide the `$parameters` array
-	$query = query($pdo, 'SELECT * FROM `joke` WHERE `id` = :id', $parameters);
+	$parameters = [
+		'value' => $value
+	];
+
+	$query = query($pdo, $query, $parameters);
 
 	return $query->fetch();
 }
 
 
-function insertJoke($pdo, $fields) {
+function insert($pdo, $table, $fields) {
 
 	$keys = [];
 
@@ -36,7 +37,7 @@ function insertJoke($pdo, $fields) {
 		$keys[] = '`' . $key . '`';
 	}
 
-	$query = 'INSERT INTO `joke` (' . implode(', ', $keys) . ') ';
+	$query = 'INSERT INTO `' . $table .'` (' . implode(', ', $keys) . ') ';
 	$query .= 'VALUES (';
 
 
@@ -48,9 +49,10 @@ function insertJoke($pdo, $fields) {
 	query($pdo, $query, $fields);
 }
 
-function updateJoke($pdo, $fields) {
 
-	$query = ' UPDATE `joke` SET ';
+function update($pdo, $table, $primaryKey, $fields) {
+
+	$query = ' UPDATE `' . $table .'` SET ';
 
 
 	//Start off with an empty array
@@ -65,7 +67,7 @@ function updateJoke($pdo, $fields) {
 	$query .= implode(', ', $fieldArray);
 
 
-	$query .= ' WHERE `id` = :primaryKey';
+	$query .= ' WHERE `' . $primaryKey . '` = :primaryKey';
 
 	//Set the :primaryKey variable
 	$fields['primaryKey'] = $fields['id'];
@@ -75,17 +77,15 @@ function updateJoke($pdo, $fields) {
 
 
 
-function deleteJoke($pdo, $id) {
-  $parameters = [':id' => $id];
+function delete($pdo, $table, $id, $primaryKey) {
+	$parameters = [':id' => $id];
 
-  query($pdo, 'DELETE FROM `joke` WHERE `id` = :id', $parameters);
+	query($pdo, 'DELETE FROM `' . $table . '` WHERE `' . $primaryKey . '` = :id', $parameters);
 }
 
 
-function allJokes($pdo) {
-  $jokes =  query($pdo, 'SELECT `joke`.`id`, `joketext`, `name`, `email`
-          				 FROM `joke` INNER JOIN `author`
-            			 ON `authorid` = `author`.`id`');
+function findAll($pdo, $table) {
+	$result = query($pdo, 'SELECT * FROM `' . $table . '`');
 
-  return $jokes->fetchAll();
+	return $result->fetchAll();
 }

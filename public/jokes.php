@@ -1,28 +1,42 @@
 <?php
 
 try {
-  include __DIR__ . '/../includes/DatabaseConnection.php';
-  include __DIR__ . '/../includes/DatabaseFunctions.php';
+	include __DIR__ . '/../includes/DatabaseConnection.php';
+	include __DIR__ . '/../includes/DatabaseFunctions.php';
 
-  $jokes = allJokes($pdo);
+	  
+	$result = findAll($pdo, 'joke');
+
+	$jokes = [];
+	foreach ($result as $joke) {
+		$author = findById($pdo, 'author', 'id', $joke['authorId']);
+
+		$jokes[] = [
+			'id' => $joke['id'],
+			'joketext' => $joke['joketext'],
+			'name' => $author['name'],
+			'email' => $author['email']
+		];
+
+	}
 
 
-  $title = 'Joke list';
+	$title = 'Joke list';
 
-  $totalJokes = totalJokes($pdo);
+	$totalJokes = total($pdo, 'joke');
 
-  ob_start();
+	ob_start();
 
-  include  __DIR__ . '/../templates/jokes.html.php';
+	include  __DIR__ . '/../templates/jokes.html.php';
 
-  $output = ob_get_clean();
+	$output = ob_get_clean();
 
 }
 catch (PDOException $e) {
-  $title = 'An error has occurred';
+	$title = 'An error has occurred';
 
-  $output = 'Database error: ' . $e->getMessage() . ' in ' .
-  $e->getFile() . ':' . $e->getLine();
+	$output = 'Database error: ' . $e->getMessage() . ' in ' .
+	$e->getFile() . ':' . $e->getLine();
 }
 
 include  __DIR__ . '/../templates/layout.html.php';
