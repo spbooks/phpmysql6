@@ -3,12 +3,13 @@ include __DIR__ . '/../includes/DatabaseConnection.php';
 include __DIR__ . '/../includes/DatabaseFunctions.php';
 
 try {
-	if (isset($_POST['joketext'])) {
+	if (isset($_POST['joke'])) {
 
-		save($pdo, 'joke', 'id', ['id' => $_POST['jokeid'],
-						  'joketext' => $_POST['joketext'],
-						  'jokedate' => new DateTime(),
-						  'authorId' => 1]);
+		$joke = $_POST['joke'];
+		$joke['jokedate'] = new DateTime();
+		$joke['authorId'] = 1;
+
+		save($pdo, 'joke', 'id', $joke);
 		
 		header('location: jokes.php');  
 
