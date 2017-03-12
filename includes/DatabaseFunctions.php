@@ -45,7 +45,8 @@ function insert($pdo, $table, $fields) {
 
 	$query .= ':' . implode(', :', $fieldKeys) . ')';
 
-
+	$fields = processDates($fields);
+	
 	query($pdo, $query, $fields);
 }
 
@@ -72,6 +73,8 @@ function update($pdo, $table, $primaryKey, $fields) {
 	//Set the :primaryKey variable
 	$fields['primaryKey'] = $fields['id'];
 
+	$fields = processDates($fields);
+
 	query($pdo, $query, $fields);
 }
 
@@ -88,4 +91,14 @@ function findAll($pdo, $table) {
 	$result = query($pdo, 'SELECT * FROM `' . $table . '`');
 
 	return $result->fetchAll();
+}
+
+function processDates($fields) {
+	foreach ($fields as $key => $value) {
+		if ($value instanceof DateTime) {
+			$fields[$key] = $value->format('Y-m-d');
+		}
+	}
+
+	return $fields;
 }
