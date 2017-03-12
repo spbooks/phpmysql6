@@ -28,25 +28,28 @@ function findById($pdo, $table, $primaryKey, $value) {
 	return $query->fetch();
 }
 
-
 function insert($pdo, $table, $fields) {
-
-	$keys = [];
+	$query = 'INSERT INTO `' . $table . '` (';
 
 	foreach ($fields as $key => $value) {
-		$keys[] = '`' . $key . '`';
+		$query .= '`' . $key . '`,';
 	}
 
-	$query = 'INSERT INTO `' . $table .'` (' . implode(', ', $keys) . ') ';
-	$query .= 'VALUES (';
+	$query = rtrim($query, ',');
+
+	$query .= ') VALUES (';
 
 
-	$fieldKeys = array_keys($fields);
+	foreach ($fields as $key => $value) {
+		$query .= ':' . $key . ',';
+	}
 
-	$query .= ':' . implode(', :', $fieldKeys) . ')';
+	$query = rtrim($query, ',');
+
+	$query .= ')';
 
 	$fields = processDates($fields);
-	
+
 	query($pdo, $query, $fields);
 }
 
@@ -56,15 +59,11 @@ function update($pdo, $table, $primaryKey, $fields) {
 	$query = ' UPDATE `' . $table .'` SET ';
 
 
-	//Start off with an empty array
-	$fieldArray = [];
-
 	foreach ($fields as $key => $value) {
 		$query .= '`' . $key . '` = :' . $key . ',';
 	}
 
 	$query = rtrim($query, ',');
-
 
 	$query .= ' WHERE `' . $primaryKey . '` = :primaryKey';
 
@@ -75,6 +74,7 @@ function update($pdo, $table, $primaryKey, $fields) {
 
 	query($pdo, $query, $fields);
 }
+
 
 
 
