@@ -102,3 +102,16 @@ function processDates($fields) {
 
 	return $fields;
 }
+
+
+function save($pdo, $table, $primaryKey, $record) {
+	try {
+		if ($record[$primaryKey] == '') {
+			$record[$primaryKey] = null;
+		}
+		insert($pdo, $table, $record);
+	}
+	catch (PDOException $e) {
+		update($pdo, $table, $primaryKey, $record);
+	}
+}
