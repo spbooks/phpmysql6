@@ -80,7 +80,7 @@ function update($pdo, $table, $primaryKey, $fields) {
 
 
 
-function delete($pdo, $table, $id, $primaryKey) {
+function delete($pdo, $table, $primaryKey, $id ) {
 	$parameters = [':id' => $id];
 
 	query($pdo, 'DELETE FROM `' . $table . '` WHERE `' . $primaryKey . '` = :id', $parameters);

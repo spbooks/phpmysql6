@@ -14,6 +14,7 @@ try {
 		$jokes[] = [
 			'id' => $joke['id'],
 			'joketext' => $joke['joketext'],
+			'jokedate' => $joke['jokedate'],
 			'name' => $author['name'],
 			'email' => $author['email']
 		];
