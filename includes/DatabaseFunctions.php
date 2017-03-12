@@ -60,13 +60,10 @@ function update($pdo, $table, $primaryKey, $fields) {
 	$fieldArray = [];
 
 	foreach ($fields as $key => $value) {
-		//Add, for example, `id = :id` to the end of the array
-		$fieldArray[] = '`' . $key . '` = :' . $key;
+		$query .= '`' . $key . '` = :' . $key . ',';
 	}
 
-
-	$query .= implode(', ', $fieldArray);
-
+	$query = rtrim($query, ',');
 
 	$query .= ' WHERE `' . $primaryKey . '` = :primaryKey';
 
