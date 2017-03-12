@@ -29,25 +29,30 @@ function getJoke($pdo, $id) {
 
 
 function insertJoke($pdo, $fields) {
-
-	$keys = [];
+	$query = 'INSERT INTO `joke` (';
 
 	foreach ($fields as $key => $value) {
-		$keys[] = '`' . $key . '`';
+		$query .= '`' . $key . '`,';
 	}
 
-	$query = 'INSERT INTO `joke` (' . implode(', ', $keys) . ') ';
-	$query .= 'VALUES (';
+	$query = rtrim($query, ',');
+
+	$query .= ') VALUES (';
 
 
-	$fieldKeys = array_keys($fields);
+	foreach ($fields as $key => $value) {
+		$query .= ':' . $key . ',';
+	}
 
-	$query .= ':' . implode(', :', $fieldKeys) . ')';
+	$query = rtrim($query, ',');
+
+	$query .= ')';
 
 	$fields = processDates($fields);
-	
+
 	query($pdo, $query, $fields);
 }
+
 
 function updateJoke($pdo, $fields) {
 
