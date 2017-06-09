@@ -66,7 +66,7 @@ class JokeController {
 			$joke['jokedate'] = new DateTime();
 			$joke['authorId'] = 1;
 
-			$jokesTable->save($joke);
+			$this->jokesTable->save($joke);
 			
 			header('location: jokes.php');  
 
@@ -74,7 +74,7 @@ class JokeController {
 		else {
 
 			if (isset($_GET['id'])) {
-				$joke = $jokesTable->findById($_GET['id']);
+				$joke = $this->jokesTable->findById($_GET['id']);
 			}
 
 			$title = 'Edit joke';
