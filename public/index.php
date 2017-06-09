@@ -10,21 +10,9 @@ try {
 	$jokeController = new JokeController($jokesTable, $authorsTable);
 
 
-	if (isset($_GET['edit'])) {
-		$page = $jokeController->edit();
-	}
+	$action = $_GET['action'] ?? 'home';
 
-	else if (isset($_GET['delete'])) {
-		$page = $jokeController->delete();
-	}
-
-	else if (isset($_GET['list'])) {
-		 $page = $jokeController->list();
-	}
-
-	else {
-		$page = $jokeController->home();
-	}
+	$page = $jokeController->$action();
 
 	$title = $page['title'];
 	$output = $page['output'];
