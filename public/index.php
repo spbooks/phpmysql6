@@ -1,4 +1,14 @@
 <?php
+function loadTemplate($templateFileName, $variables = []) {
+	extract($variables);
+
+	ob_start();
+	include  __DIR__ . '/../templates/' . $templateFileName;
+
+	return ob_get_clean();
+}
+
+
 try {
 	include __DIR__ . '/../includes/DatabaseConnection.php';
 	include __DIR__ . '/../classes/DatabaseTable.php';
@@ -18,14 +28,11 @@ try {
 	
 
 	if (isset($page['variables'])) {
-		extract($page['variables']);
+		$output = loadTemplate($page['template'], $page['variables']);
 	}
-
-	ob_start();
-
-	include  __DIR__ . '/../templates/' . $page['template'];
-
-	$output = ob_get_clean();
+	else {
+		$output = loadTemplate($page['template']);
+	}
 
 
 }
