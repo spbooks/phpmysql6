@@ -8,7 +8,6 @@ function loadTemplate($templateFileName, $variables = []) {
 	return ob_get_clean();
 }
 
-
 try {
 	include __DIR__ . '/../includes/DatabaseConnection.php';
 	include __DIR__ . '/../classes/DatabaseTable.php';
@@ -22,10 +21,15 @@ try {
 
 	$action = $_GET['action'] ?? 'home';
 
-	$page = $jokeController->$action();
+	if ($action == strtolower($action)) {
+		$page = $jokeController->$action();
+	}
+	else {
+		http_response_code(301);
+		header('location: index.php?action=' . strtolower($action));
+	}
 
 	$title = $page['title'];
-	
 
 	if (isset($page['variables'])) {
 		$output = loadTemplate($page['template'], $page['variables']);
@@ -33,8 +37,7 @@ try {
 	else {
 		$output = loadTemplate($page['template']);
 	}
-
-
+	
 }
 catch (PDOException $e) {
 	$title = 'An error has occurred';
