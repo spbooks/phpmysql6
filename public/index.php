@@ -10,7 +10,7 @@ function loadTemplate($templateFileName, $variables = []) {
 
 try {
 	include __DIR__ . '/../includes/DatabaseConnection.php';
-	include __DIR__ . '/../classes/controllers/DatabaseTable.php';
+	include __DIR__ . '/../classes/DatabaseTable.php';
 
 	$jokesTable = new DatabaseTable($pdo, 'joke', 'id');
 	$authorsTable = new DatabaseTable($pdo, 'author', 'id');
@@ -24,7 +24,7 @@ try {
 
 		$className = ucfirst($controllerName) . 'Controller';
 
-		include __DIR__ . '/../controllers/' . $className . '.php';
+		include __DIR__ . '/../classes/controllers/' . $className . '.php';
 
 		if ($controllerName === 'joke') {
 			$arguments = [$jokesTable, $authorsTable];
