@@ -33,7 +33,7 @@ class JokeController {
 
 		ob_start();
 
-		include  __DIR__ . '/../templates/jokes.html.php';
+		include  __DIR__ . '/../../templates/jokes.html.php';
 
 		$output = ob_get_clean();
 
@@ -45,7 +45,7 @@ class JokeController {
 
 		ob_start();
 
-		include  __DIR__ . '/../templates/home.html.php';
+		include  __DIR__ . '/../../templates/home.html.php';
 
 		$output = ob_get_clean();
 
@@ -81,7 +81,7 @@ class JokeController {
 
 			ob_start();
 
-			include  __DIR__ . '/../templates/editjoke.html.php';
+			include  __DIR__ . '/../../templates/editjoke.html.php';
 
 			$output = ob_get_clean();
 
