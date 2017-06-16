@@ -27,13 +27,12 @@ try {
 		include __DIR__ . '/../classes/controllers/' . $className . '.php';
 
 		if ($controllerName === 'joke') {
-			$arguments = [$jokesTable, $authorsTable];
+			$controller = new JokeController($jokesTable, $authorsTable);
 		}
 		else if ($controllerName === 'register') {
-			$arguments = [$authorsTable];
+			$controller = new RegisterController($authorsTable);
 		}
-		
-		$controller = new $className(...$arguments);
+
 		$page = $controller->$action();
 	}
 	else {
