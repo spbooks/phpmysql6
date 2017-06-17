@@ -22,18 +22,23 @@ try {
 
 	if ($action == strtolower($action) && $controllerName == strtolower($controllerName)) {
 
-		$className = ucfirst($controllerName) . 'Controller';
+			$route = $_GET['route'] ?? 'joke/home'; //if no route variable is set, use 'joke/home'
 
-		include __DIR__ . '/../classes/controllers/' . $className . '.php';
-
-		if ($controllerName === 'joke') {
-			$controller = new JokeController($jokesTable, $authorsTable);
-		}
-		else if ($controllerName === 'register') {
-			$controller = new RegisterController($authorsTable);
-		}
-
-		$page = $controller->$action();
+			if ($route === 'joke/list') {
+				include __DIR__ . '/../classes/controllers/JokeController.php';
+				$controller = new JokeController($jokesTable, $authorsTable);
+				$page = $controller->list();
+			}
+			else if ($route === 'joke/home') {
+				include __DIR__ . '/../classes/controllers/JokeController.php';
+				$controller = new JokeController($jokesTable, $authorsTable);
+				$page = $controller->home();
+			}
+			else if ($route === 'register') {
+				include __DIR__ . '/../classes/controllers/RegisterController.php';
+				$controller = new RegisterController($authorsTable);
+				$page = $controller->showForm();
+			}
 	}
 	else {
 		http_response_code(301);
