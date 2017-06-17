@@ -16,13 +16,9 @@ try {
 	$authorsTable = new DatabaseTable($pdo, 'author', 'id');
 
 
-	$action = $_GET['action'] ?? 'home';
+	$route = $_GET['route'] ?? 'joke/home'; //if no route variable is set, use 'joke/home'
 
-	$controllerName = $_GET['controller'] ?? 'joke';
-
-	if ($action == strtolower($action) && $controllerName == strtolower($controllerName)) {
-
-			$route = $_GET['route'] ?? 'joke/home'; //if no route variable is set, use 'joke/home'
+	if ($route == strtolower($route)) {
 
 			if ($route === 'joke/list') {
 				include __DIR__ . '/../classes/controllers/JokeController.php';
@@ -52,7 +48,7 @@ try {
 	}
 	else {
 		http_response_code(301);
-		header('location: index.php?controller=' . strtolower($controllerName) . '&action=' . strtolower($action));
+		header('location: index.php?route=' . strtolower($route));
 	}
 
 
