@@ -47,7 +47,7 @@ try {
 	}
 	else {
 		http_response_code(301);
-		header('location: index.php?route=' . strtolower($route));
+		header('location: ' . strtolower($route));
 	}
 
 
