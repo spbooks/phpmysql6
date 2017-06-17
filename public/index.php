@@ -1,6 +1,6 @@
 <?php
 try {
-	include __DIR__ . '/../includes/autoload.php';
+	include __DIR__ . '/../classes/EntryPoint.php';
 	include __DIR__ . '/../classes/IjdbRoutes.php';
 	
 	$route = ltrim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
