@@ -1,7 +1,7 @@
 <?php
 namespace Ijdb;
 
-class IjdbRoutes {
+class IjdbRoutes implements \Ninja\Routes {
 	public function getRoutes() {
 		include __DIR__ . '/../../includes/DatabaseConnection.php';
 
