@@ -60,33 +60,29 @@ class Joke {
 		header('location: /joke/list'); 
 	}
 
+	public function saveEdit() {
+		$joke = $_POST['joke'];
+		$joke['jokedate'] = new \DateTime();
+		$joke['authorId'] = 1;
+
+		$this->jokesTable->save($joke);
+		
+		header('location: /joke/list'); 
+	}
 
 	public function edit() {
-		if (isset($_POST['joke'])) {
-
-			$joke = $_POST['joke'];
-			$joke['jokedate'] = new DateTime();
-			$joke['authorId'] = 1;
-
-			$this->jokesTable->save($joke);
-			
-			header('location: /joke/list'); 
-
+		if (isset($_GET['id'])) {
+			$joke = $this->jokesTable->findById($_GET['id']);
 		}
-		else {
 
-			if (isset($_GET['id'])) {
-				$joke = $this->jokesTable->findById($_GET['id']);
-			}
+		$title = 'Edit joke';
 
-			$title = 'Edit joke';
-
-			return ['template' => 'editjoke.html.php',
-					'title' => $title,
-					'variables' => [
-							'joke' => $joke ?? null
-						]
-					];
-		}
+		return ['template' => 'editjoke.html.php',
+				'title' => $title,
+				'variables' => [
+						'joke' => $joke ?? null
+					]
+				];
 	}
+	
 }
