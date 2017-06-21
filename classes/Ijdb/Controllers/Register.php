@@ -41,16 +41,27 @@ class Register {
 			$valid = false;
 			$errors[] = 'Invalid email address';
 		}
+		else { //if the email is not blank and valid:
+			//convert the email to lowercase
+			$author['email'] = strtolower($author['email']);
+
+			//search for the lowercase version of `$author['email']`
+			if (count($this->authorsTable->find('email', $author['email'])) > 0) {
+				$valid = false;
+				$errors[] = 'That email address is already registered';
+			}
+		}
+
 
 		if (empty($author['password'])) {
 			$valid = false;
 			$errors[] = 'Password cannot be blank';
 		}
 
-		//If $valid is still true, no fields were blank and the datacan be added
+		//If $valid is still true, no fields were blank and the data can be added
 		if ($valid == true) {
-			$this->authorsTable->save($author);
 
+			//When submitted, the $author variable now contains a lowercase value for email
 			$this->authorsTable->save($author);
 
 			header('Location: /author/success');
