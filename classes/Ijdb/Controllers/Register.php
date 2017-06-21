@@ -37,6 +37,10 @@ class Register {
 			$valid = false;
 			$errors[] = 'Email cannot be blank';
 		}
+		else if (filter_var($author['email'], FILTER_VALIDATE_EMAIL) == false) {
+			$valid = false;
+			$errors[] = 'Invalid email address';
+		}
 
 		if (empty($author['password'])) {
 			$valid = false;
