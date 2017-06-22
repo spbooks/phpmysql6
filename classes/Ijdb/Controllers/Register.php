@@ -60,8 +60,11 @@ class Register {
 
 		//If $valid is still true, no fields were blank and the data can be added
 		if ($valid == true) {
+			//Hash the password before saving it in the database
+			$author['password'] = password_hash($author['password'], PASSWORD_DEFAULT);
 
 			//When submitted, the $author variable now contains a lowercase value for email
+			//and a hashed password
 			$this->authorsTable->save($author);
 
 			header('Location: /author/success');
