@@ -4,17 +4,20 @@ namespace Ijdb;
 class IjdbRoutes implements \Ninja\Routes {
 	private $authorsTable;
 	private $jokesTable;
+	private $authentication;
 
 	public function __construct() {
 		include __DIR__ . '/../../includes/DatabaseConnection.php';
 
 		$this->jokesTable = new \Ninja\DatabaseTable($pdo, 'joke', 'id');
 		$this->authorsTable = new \Ninja\DatabaseTable($pdo, 'author', 'id');
+		$this->authentication = new \Ninja\Authentication($this->authorsTable, 'email', 'password');
 	}
 
 	public function getRoutes(): array {
 		$jokeController = new \Ijdb\Controllers\Joke($this->jokesTable, $this->authorsTable);
 		$authorController = new \Ijdb\Controllers\Register($this->authorsTable);
+		$loginController = new \Ijdb\Controllers\Login();
 
 		$routes = [
 			'author/register' => [
@@ -58,6 +61,12 @@ class IjdbRoutes implements \Ninja\Routes {
 					'action' => 'list'
 				]
 			],
+			'login/error' => [
+				'GET' => [
+					'controller' => $loginController,
+					'action' => 'error'
+				]
+			],
 			'' => [
 				'GET' => [
 					'controller' => $jokeController,
@@ -70,7 +79,7 @@ class IjdbRoutes implements \Ninja\Routes {
 	}
 
 	public function getAuthentication(): \Ninja\Authentication {
-		return new \Ninja\Authentication($this->authorsTable, 'email', 'password');
+		return $this->authentication;
 	}
 
 }
