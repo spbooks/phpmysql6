@@ -28,6 +28,11 @@ class Authentication {
 	}
 
 	public function isLoggedIn() {
+
+		if (empty($_SESSION['username'])) {
+			return false;
+		}
+		
 		$user = $this->users->find($this->usernameColumn, strtolower($_SESSION['username']));
 
 		if (!empty($user) && $user[0][$this->passwordColumn] === $_SESSION['password']) {

@@ -33,4 +33,9 @@ class Login {
 	public function error() {
 		return ['template' => 'loginerror.html.php', 'title' => 'You are not logged in'];
 	}
+
+	public function logout() {
+		unset($_SESSION);
+		return ['template' => 'logout.html.php', 'title' => 'You have been logged out'];
+	}
 }
