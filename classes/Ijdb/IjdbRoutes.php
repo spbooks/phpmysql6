@@ -17,7 +17,7 @@ class IjdbRoutes implements \Ninja\Routes {
 	public function getRoutes(): array {
 		$jokeController = new \Ijdb\Controllers\Joke($this->jokesTable, $this->authorsTable);
 		$authorController = new \Ijdb\Controllers\Register($this->authorsTable);
-		$loginController = new \Ijdb\Controllers\Login();
+		$loginController = new \Ijdb\Controllers\Login($this->authentication);
 
 		$routes = [
 			'author/register' => [
@@ -65,6 +65,22 @@ class IjdbRoutes implements \Ninja\Routes {
 				'GET' => [
 					'controller' => $loginController,
 					'action' => 'error'
+				]
+			],
+			'login/success' => [
+				'GET' => [
+					'controller' => $loginController,
+					'action' => 'success'
+				]
+			],
+			'login' => [
+				'GET' => [
+					'controller' => $loginController,
+					'action' => 'loginForm'
+				],
+				'POST' => [
+					'controller' => $loginController,
+					'action' => 'processLogin'
 				]
 			],
 			'' => [
