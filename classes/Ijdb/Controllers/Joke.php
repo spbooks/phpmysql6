@@ -55,6 +55,16 @@ class Joke {
 	}
 
 	public function delete() {
+
+		$author = $this->authentication->getUser();
+
+		$joke = $this->jokesTable->findById($_POST['id']);
+
+		if ($joke['authorId'] != $author['id']) {
+			return;
+		}
+		
+
 		$this->jokesTable->delete($_POST['id']);
 
 		header('location: /joke/list'); 
@@ -62,6 +72,15 @@ class Joke {
 
 	public function saveEdit() {
 		$author = $this->authentication->getUser();
+
+
+		if (isset($_GET['id'])) {
+			$joke = $this->jokesTable->findById($_GET['id']);
+
+			if ($joke['authorId'] != $author['id']) {
+				return;
+			}
+		}
 
 		$joke = $_POST['joke'];
 		$joke['jokedate'] = new \DateTime();
