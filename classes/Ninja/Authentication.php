@@ -28,7 +28,6 @@ class Authentication {
 	}
 
 	public function isLoggedIn() {
-
 		if (empty($_SESSION['username'])) {
 			return false;
 		}
@@ -37,6 +36,15 @@ class Authentication {
 
 		if (!empty($user) && $user[0][$this->passwordColumn] === $_SESSION['password']) {
 			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public function getUser() {
+		if ($this->isLoggedIn()) {
+			return $this->users->find($this->usernameColumn, strtolower($_SESSION['username']))[0];
 		}
 		else {
 			return false;

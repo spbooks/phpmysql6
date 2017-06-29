@@ -1,14 +1,16 @@
 <?php
 namespace Ijdb\Controllers;
 use \Ninja\DatabaseTable;
+use \Ninja\Authentication;
 
 class Joke {
 	private $authorsTable;
 	private $jokesTable;
 
-	public function __construct(DatabaseTable $jokesTable, DatabaseTable $authorsTable) {
+	public function __construct(DatabaseTable $jokesTable, DatabaseTable $authorsTable, Authentication $authentication) {
 		$this->jokesTable = $jokesTable;
 		$this->authorsTable = $authorsTable;
+		$this->authentication = $authentication;
 	}
 
 	public function list() {
@@ -61,9 +63,11 @@ class Joke {
 	}
 
 	public function saveEdit() {
+		$author = $this->authentication->getUser();
+
 		$joke = $_POST['joke'];
 		$joke['jokedate'] = new \DateTime();
-		$joke['authorId'] = 1;
+		$joke['authorId'] = $author['id'];
 
 		$this->jokesTable->save($joke);
 		
