@@ -31,11 +31,6 @@ class JokeController {
 
 		$totalJokes = $this->jokesTable->total();
 
-		ob_start();
-
-		include  __DIR__ . '/../../templates/';
-
-		$output = ob_get_clean();
 
 		return ['template' => 'jokes.html.php', 
 				'title' => $title, 
