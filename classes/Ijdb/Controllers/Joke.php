@@ -73,21 +73,19 @@ class Joke {
 	public function saveEdit() {
 		$author = $this->authentication->getUser();
 
+		$authorObject = new \Ijdb\Entity\Author($this->jokesTable);
 
-		if (isset($_GET['id'])) {
-			$joke = $this->jokesTable->findById($_GET['id']);
+		$authorObject->id = $author['id'];
+		$authorObject->name = $author['name'];
+		$authorObject->email = $author['email'];
+		$authorObject->password = $author['password'];
 
-			if ($joke['authorId'] != $author['id']) {
-				return;
-			}
-		}
 
 		$joke = $_POST['joke'];
 		$joke['jokedate'] = new \DateTime();
-		$joke['authorId'] = $author['id'];
 
-		$this->jokesTable->save($joke);
-		
+		$authorObject->addJoke($joke);
+
 		header('location: /joke/list'); 
 	}
 
