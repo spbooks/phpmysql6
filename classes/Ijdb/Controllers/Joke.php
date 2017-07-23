@@ -73,18 +73,10 @@ class Joke {
 	public function saveEdit() {
 		$author = $this->authentication->getUser();
 
-		$authorObject = new \Ijdb\Entity\Author($this->jokesTable);
-
-		$authorObject->id = $author['id'];
-		$authorObject->name = $author['name'];
-		$authorObject->email = $author['email'];
-		$authorObject->password = $author['password'];
-
-
 		$joke = $_POST['joke'];
 		$joke['jokedate'] = new \DateTime();
 
-		$authorObject->addJoke($joke);
+		$author->addJoke($joke);
 
 		header('location: /joke/list'); 
 	}
@@ -102,7 +94,7 @@ class Joke {
 				'title' => $title,
 				'variables' => [
 						'joke' => $joke ?? null,
-						'userId' => $author['id'] ?? null
+						'userId' => $author->id ?? null
 					]
 				];
 	}
