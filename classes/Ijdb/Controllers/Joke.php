@@ -14,23 +14,7 @@ class Joke {
 	}
 
 	public function list() {
-		$result = $this->jokesTable->findAll();
-
-		$jokes = [];
-		foreach ($result as $joke) {
-			$author = $this->authorsTable->findById($joke->authorId);
-
-			$jokes[] = [
-				'id' => $joke->id,
-				'joketext' => $joke->joketext,
-				'jokedate' => $joke->jokedate,
-				'name' => $author->name,
-				'email' => $author->email,
-				'authorId' => $author->id
-			];
-
-		}
-
+		$jokes = $this->jokesTable->findAll();
 
 		$title = 'Joke list';
 
