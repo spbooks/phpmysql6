@@ -24,7 +24,6 @@ class Category {
 				];
 	}
 
-
 	public function saveEdit() {
 		$category = $_POST['category'];
 
@@ -32,4 +31,24 @@ class Category {
 
 		header('location: /category/list');
 	}
+
+	public function list() {
+		$categories = $this->categoriesTable->findAll();
+
+		$title = 'Joke Categories';
+
+		return ['template' => 'categories.html.php', 
+				'title' => $title, 
+				'variables' => [
+						'categories' => $categories
+					]
+				];
+	}
+
+	public function delete() {
+		$this->categoriesTable->delete($_POST['id']);
+
+		header('location: /category/list'); 
+	}
+
 }
