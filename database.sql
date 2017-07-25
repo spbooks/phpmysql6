@@ -1,8 +1,8 @@
--- MySQL dump 10.16  Distrib 10.1.21-MariaDB, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: 127.0.0.1
+-- Host: 192.168.10.10    Database: ijdb_sample
 -- ------------------------------------------------------
--- Server version	5.7.16-0ubuntu0.16.04.1
+-- Server version 5.7.16-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -37,8 +37,31 @@ CREATE TABLE `author` (
 
 LOCK TABLES `author` WRITE;
 /*!40000 ALTER TABLE `author` DISABLE KEYS */;
-INSERT INTO `author` VALUES (1,'Kevin Yank','thatguy@kevinyank.com', ''),(2,'Tom Butler','tom@r.je', '');
+INSERT INTO `author` VALUES (1,'Kevin Yank','thatguy@kevinyank.com',''),(2,'Tom Butler','tom@r.je','');
 /*!40000 ALTER TABLE `author` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `category`
+--
+
+DROP TABLE IF EXISTS `category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `category`
+--
+
+LOCK TABLES `category` WRITE;
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -76,4 +99,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-13 18:17:21
+-- Dump completed on 2017-07-25 14:52:05
