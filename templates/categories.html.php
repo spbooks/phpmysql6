@@ -1,6 +1,8 @@
 
 <h2>Categories</h2>
 
+<a href="/category/edit">Add a new category</a>
+
 <?php foreach($categories as $category): ?>
 <blockquote>
   <p>
