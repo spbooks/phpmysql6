@@ -23,4 +23,12 @@ class Category {
 				]
 		];
 	}
+
+	public function saveEdit() {
+		$category = $_POST['category'];
+
+		$this->categoriesTable->save($category);
+
+		header('location: /category/list');
+	}
 }
