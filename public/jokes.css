@@ -28,3 +28,7 @@ blockquote form {  display: table-cell; width: 10%;}
 
 .errors {padding: 1em; border: 1px solid red; background-color: lightyellow; color: red; margin-bottom: 1em; overflow: auto;}
 .errors ul {margin-left: 1em;}
+
+form p {clear: both;}
+input[type="checkbox"] {float: left; clear: left; width: auto; margin-right: 10px;}
+input[type="checkbox"] + label {clear: right;}
