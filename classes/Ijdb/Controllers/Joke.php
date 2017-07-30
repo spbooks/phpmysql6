@@ -47,7 +47,7 @@ class Joke {
 
 		$joke = $this->jokesTable->findById($_POST['id']);
 
-		if ($joke['authorId'] != $author['id']) {
+		if ($joke->authorId != $author->id) {
 			return;
 		}
 		
