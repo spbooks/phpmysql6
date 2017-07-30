@@ -17,9 +17,8 @@ class Author {
 	}
 
 	public function addJoke($joke) {
-
 		$joke['authorId'] = $this->id;
 
-		$this->jokesTable->save($joke);
+		return $this->jokesTable->save($joke);
 	}
 }
