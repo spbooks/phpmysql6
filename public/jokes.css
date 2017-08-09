@@ -32,3 +32,9 @@ blockquote form {  display: table-cell; width: 10%;}
 form p {clear: both;}
 input[type="checkbox"] {float: left; clear: left; width: auto; margin-right: 10px;}
 input[type="checkbox"] + label {clear: right;}
+
+.jokelist {display: table;}
+.categories {display: table-cell; width: 20%; background-color: #333; padding: 1em; list-style-type: none;}
+.categories a {color: white; text-decoration: none;}
+.categories li {margin-bottom: 1em;}
+.jokelist .jokes {display: table-cell; padding: 1em;}

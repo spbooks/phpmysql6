@@ -1,5 +1,15 @@
+<div class="jokelist">
+
+<ul class="categories">
+  <?php foreach($categories as $category): ?>
+    <li><a href="/joke/list?category=<?=$category->id?>"><?=$category->name?></a><li>
+  <?php endforeach; ?>
+</ul>
+
+<div class="jokes">
 
 <p><?=$totalJokes?> jokes have been submitted to the Internet Joke Database.</p>
+
 
 <?php foreach($jokes as $joke): ?>
 <blockquote>
@@ -26,3 +36,5 @@ echo $date->format('jS F Y');
   </p>
 </blockquote>
 <?php endforeach; ?>
+
+</div>
