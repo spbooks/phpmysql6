@@ -34,6 +34,10 @@ class Login {
 		return ['template' => 'loginerror.html.php', 'title' => 'You are not logged in'];
 	}
 
+	public function permissionsError() {
+		return ['template' => 'permissionserror.html.php', 'title' => 'Access Denied'];
+	}
+
 	public function logout() {
 		unset($_SESSION);
 		return ['template' => 'logout.html.php', 'title' => 'You have been logged out'];
