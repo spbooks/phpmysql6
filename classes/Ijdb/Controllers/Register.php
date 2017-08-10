@@ -80,4 +80,31 @@ class Register {
 				   ]; 
 		}
 	}
+
+	public function list() {
+		$authors = $this->authorsTable->findAll();
+
+		return ['template' => 'authorlist.html.php',
+				'title' => 'Author List',
+				'variables' => [
+						'authors' => $authors
+					]
+				];
+	}
+
+	public function permissions() {
+
+		$author = $this->authorsTable->findById($_GET['id']);
+
+		$reflected = new \ReflectionClass('\Ijdb\Entity\Author');
+		$constants = $reflected->getConstants();
+
+		return ['template' => 'permissions.html.php',
+				'title' => 'Edit Permissions',
+				'variables' => [
+						'author' => $author,
+						'permissions' => $constants
+					]
+				];	
+	}
 }
