@@ -13,8 +13,7 @@
 
 <?php foreach($jokes as $joke): ?>
 <blockquote>
-  <p>
-  <?=htmlspecialchars($joke->joketext, ENT_QUOTES, 'UTF-8')?>
+  <?=(new \Ninja\Markdown($joke->joketext))->toHtml()?>
 
     (by <a href="mailto:<?=htmlspecialchars($joke->getAuthor()->email, ENT_QUOTES,
                     'UTF-8'); ?>">
@@ -37,7 +36,6 @@ echo $date->format('jS F Y');
   </form>
   <?php endif; ?>
 <?php endif; ?>
-  </p>
 </blockquote>
 <?php endforeach; ?>
 
