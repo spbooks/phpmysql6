@@ -15,7 +15,7 @@ class Category {
 	}
 
 	public function getJokes() {
-		$jokeCategories = $this->jokeCategoriesTable->find('categoryId', $this->id);
+		$jokeCategories = $this->jokeCategoriesTable->find('categoryId', $this->id, null, 10);
 
 		$jokes = [];
 

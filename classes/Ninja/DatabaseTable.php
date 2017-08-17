@@ -40,7 +40,7 @@ class DatabaseTable {
 		return $query->fetchObject($this->className, $this->constructorArgs);
 	}
 
-	public function find($column, $value, $orderBy = null) {
+	public function find($column, $value, $orderBy = null, $limit = null) {
 		$query = 'SELECT * FROM ' . $this->table . ' WHERE ' . $column . ' = :value';
 
 		$parameters = [
@@ -49,6 +49,10 @@ class DatabaseTable {
 
 		if ($orderBy != null) {
 			$query .= ' ORDER BY ' . $orderBy;
+		}
+
+		if ($limit != null) {
+			$query .= ' LIMIT ' . $limit;
 		}
 
 		$query = $this->query($query, $parameters);
@@ -120,11 +124,15 @@ class DatabaseTable {
 		$query = $this->query($query, $parameters);
 	}
 
-	public function findAll($orderBy = null) {
+	public function findAll($orderBy = null, $limit = null) {
 		$query = 'SELECT * FROM ' . $this->table;
 
 		if ($orderBy != null) {
 			$query .= ' ORDER BY ' . $orderBy;
+		}
+
+		if ($limit != null) {
+			$query .= ' LIMIT ' . $limit;
 		}
 
 		$result = $this->query($query);

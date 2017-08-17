@@ -18,14 +18,12 @@ class Joke {
 
 	public function list() {
 
-		if (isset($_GET['category']))
-		{
+		if (isset($_GET['category'])) {
 			$category = $this->categoriesTable->findById($_GET['category']);
 			$jokes = $category->getJokes();
 		}
-		else
-		{
-			$jokes = $this->jokesTable->findAll('jokedate DESC');  
+		else {
+			$jokes = $this->jokesTable->findAll('jokedate DESC', 10);
 		}		
 
 		$title = 'Joke list';
