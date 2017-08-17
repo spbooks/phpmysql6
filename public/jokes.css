@@ -38,3 +38,6 @@ input[type="checkbox"] + label {clear: right;}
 .categories a {color: white; text-decoration: none;}
 .categories li {margin-bottom: 1em;}
 .jokelist .jokes {display: table-cell; padding: 1em;}
+
+.currentpage:before { content: "["; }
+.currentpage:after { content: "]"; }

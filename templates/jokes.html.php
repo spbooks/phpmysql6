@@ -39,4 +39,21 @@ echo $date->format('jS F Y');
 </blockquote>
 <?php endforeach; ?>
 
+
+
+Select page: 
+
+<?php
+
+$numPages = ceil($totalJokes/10);
+
+for ($i = 1; $i <= $numPages; $i++):
+  if ($i == $currentPage):
+?>
+  <a class="currentpage" href="/joke/list?page=<?=$i?>"><?=$i?></a>
+<?php else: ?>
+  <a href="/joke/list?page=<?=$i?>"><?=$i?></a>
+<?php endif; ?>
+<?php endfor; ?>
+
 </div>
