@@ -25,7 +25,7 @@ class Joke {
 		}
 		else
 		{
-			$jokes = $this->jokesTable->findAll();  
+			$jokes = $this->jokesTable->findAll('jokedate DESC');  
 		}		
 
 		$title = 'Joke list';
