@@ -51,7 +51,7 @@ $branchName = str_replace('On branch ', '', $output[0]);
 if (isset($_GET['branch'])) {
 	exec('git status', $status);
 	$status = implode("\n", $status);
-	if (strpos($stauts, 'nothing to commit') !== false) {
+	if (strpos($status, 'nothing to commit') !== false) {
 		$parts = explode('-Modified', $branchName);
 		$newBranchName = $parts[0] . '-Modified-' . date('Y-m-d H:i:s');
 
