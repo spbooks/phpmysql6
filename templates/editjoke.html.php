@@ -1,4 +1,4 @@
-<?php if (empty($joke->id) || $userId == $joke->authorId) { ?>
+<?php if (empty($joke->id) || $userId == $joke->authorId): ?>
 <form action="" method="post">
 	<input type="hidden" name="joke[id]" value="<?=$joke->id ?? ''?>">
     <label for="joketext">Type your joke here:</label>
@@ -13,8 +13,8 @@
 
     <input type="submit" name="submit" value="Save">
 </form>
-<?php } else { ?>
+<?php else: ?>
 
 <p>You may only edit jokes that you posted.</p>
 
-<?php } ?>
+<?php endif; ?>
