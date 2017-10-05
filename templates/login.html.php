@@ -1,8 +1,6 @@
-<?php
-if (isset($error)) {
-	echo '<div class="errors">' . $error . '</div>';
-}
-?>
+<?php if (isset($error)):?>
+	<div class="errors"><?=$error;?></div>
+<?php endif; ?>
 <form method="post" action="">
 	<label for="email">Your email address</label>
 	<input type="text" id="email" name="email">
