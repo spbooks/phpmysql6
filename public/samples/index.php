@@ -110,12 +110,14 @@ $branchName = str_replace('On branch ', '', $output[0]);
 	<ul class="branches">
 	<?php
 
-	exec('git branch', $branches);
+
+	exec('git branch -r', $branches);
 
 	foreach ($branches as $branch) {
 
-		$class = $branch[0] == '*' ? 'current' : '';
+		$class = strpos($branch, $branchName) !== false ? 'current' : '';
 		$branch = trim($branch, " \t*");
+		$branch = str_replace('origin/', '', $branch);
 
 		if ($branch == 'master') continue;
 		echo '<li class="' .$class . '"><a href="' . $_SERVER['PHP_SELF'] . '?branch=' . $branch . '">' .  $branch . '</a></li>';
@@ -123,4 +125,4 @@ $branchName = str_replace('On branch ', '', $output[0]);
 	?>
 	</ul>
 	</body>
-</html>
+</html> 
