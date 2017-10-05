@@ -1,6 +1,5 @@
  
 <?php
-
 try {
 	$pdo = new PDO('mysql:host=localhost;charset=utf8', 'homestead', 'secret');
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -51,15 +50,30 @@ $branchName = str_replace('On branch ', '', $output[0]);
 if (isset($_GET['branch'])) {
 	exec('git status', $status);
 	$status = implode("\n", $status);
-	if (strpos($status, 'nothing to commit') !== false) {
-		$parts = explode('-Modified', $branchName);
-		$newBranchName = $parts[0] . '-Modified-' . date('Y-m-d H:i:s');
+	if (strpos($status, 'nothing to commit') == false) {
 
-		exec('git checkout -b "' . $newBranchName . '"');
-		exec('git add .');
-		exec('git commit -m "user modified sample"');
+
+
+		$parts = explode('_Modified', $branchName);
+		$newBranchName = $parts[0] . '_Modified-' . date('Y-m-d-H.i.s');
+
+
+		exec('git checkout -b ' . $newBranchName . ' 2>&1', $z);
+
+		exec('git add -A 2>&1', $x);
+		exec('git commit -m "user modified sample" 2>&1', $y);
+
+		var_dump($z);
+				var_dump($y);
+						var_dump($x);
 	}
 	exec('git checkout "' . $_GET['branch'] . '"', $n);
+	$branchName = $_GET['branch'];
+}
+
+if (!isset($branchName)) {
+	exec('git status', $output);
+	$branchName = str_replace('On branch ', '', $output[0]);
 }
 
 
@@ -120,13 +134,15 @@ if (isset($_GET['branch'])) {
 	<?php
 
 
-	exec('git branch -r', $branches);
+	exec('git branch -a', $branches);
 
 	foreach ($branches as $branch) {
 
-		$class = strpos($branch, $branchName) !== false ? 'current' : '';
+		
 		$branch = trim($branch, " \t*");
 		$branch = str_replace('origin/', '', $branch);
+
+		$class =$branch == $branchName ? 'current' : '';
 
 		if ($branch == 'master') continue;
 		echo '<li class="' .$class . '"><a href="' . $_SERVER['PHP_SELF'] . '?branch=' . $branch . '">' .  $branch . '</a></li>';
