@@ -45,14 +45,23 @@ catch (PDOException $e) {
 }
 
 
-
+exec('git status', $output);
+$branchName = str_replace('On branch ', '', $output[0]);
 
 if (isset($_GET['branch'])) {
-	exec('git checkout ' . $_GET['branch'], $n);
-}
-exec('git status', $output);
+	exec('git status', $status);
+	$status = implode("\n", $status);
+	if (strpos($stauts, 'nothing to commit') !== false) {
+		$parts = explode('-Modified', $branchName);
+		$newBranchName = $parts[0] . '-Modified-' . date('Y-m-d H:i:s');
 
-$branchName = str_replace('On branch ', '', $output[0]);
+		exec('git checkout -b "' . $newBranchName . '"');
+		exec('git add .');
+		exec('git commit -m "user modified sample"');
+	}
+	exec('git checkout "' . $_GET['branch'] . '"', $n);
+}
+
 
 ?><!doctype html>
 <html>
