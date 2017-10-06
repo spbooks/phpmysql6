@@ -136,6 +136,8 @@ if (!isset($branchName)) {
 
 	exec('git branch -a', $branches);
 
+	$branchList = [];
+
 	foreach ($branches as $branch) {
 
 		
@@ -143,11 +145,19 @@ if (!isset($branchName)) {
 		$branch = str_replace('origin/', '', $branch);
 		$branch = str_replace('remotes/', '', $branch);
 
+		$branchList[$branch] = $branch;
+
+	}
+
+	foreach ($branchList as $branch) {
 		$class =$branch == $branchName ? 'current' : '';
 
 		if ($branch == 'master') continue;
 		echo '<li class="' .$class . '"><a href="' . $_SERVER['PHP_SELF'] . '?branch=' . $branch . '">' .  $branch . '</a></li>';
 	}
+
+
+		
 	?>
 	</ul>
 	</body>
