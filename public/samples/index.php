@@ -141,6 +141,7 @@ if (!isset($branchName)) {
 		
 		$branch = trim($branch, " \t*");
 		$branch = str_replace('origin/', '', $branch);
+		$branch = str_replace('remotes/', '', $branch);
 
 		$class =$branch == $branchName ? 'current' : '';
 
