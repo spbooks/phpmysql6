@@ -1,9 +1,11 @@
 <?php
 class EntryPoint {
 	private $route;
+	private $routes;
 
-	public function __construct($route) {
+	public function __construct($route, $routes) {
 		$this->route = $route;
+		$this->routes = $routes;
 		$this->checkUrl();
 	}
 
@@ -23,45 +25,9 @@ class EntryPoint {
 		return ob_get_clean();
 	}
 
-	private function callAction() {
-		include __DIR__ . '/../classes/DatabaseTable.php';
-		include __DIR__ . '/../includes/DatabaseConnection.php';
-
-		$jokesTable = new DatabaseTable($pdo, 'joke', 'id');
-		$authorsTable = new DatabaseTable($pdo, 'author', 'id');
-
-		if ($this->route === 'joke/list') {
-			include __DIR__ . '/../classes/controllers/JokeController.php';
-			$controller = new JokeController($jokesTable, $authorsTable);
-			$page = $controller->list();
-		}
-		else if ($this->route === '') {
-			include __DIR__ . '/../classes/controllers/JokeController.php';
-			$controller = new JokeController($jokesTable, $authorsTable);
-			$page = $controller->home();
-		}
-		else if ($this->route === 'joke/edit') {
-			include __DIR__ . '/../classes/controllers/JokeController.php';
-			$controller = new JokeController($jokesTable, $authorsTable);
-			$page = $controller->edit();
-		}
-		else if ($this->route === 'joke/delete') {
-			include __DIR__ . '/../classes/controllers/JokeController.php';
-			$controller = new JokeController($jokesTable, $authorsTable);
-			$page = $controller->delete();
-		}
-		else if ($this->route === 'register') {
-			include __DIR__ . '/../classes/controllers/RegisterController.php';
-			$controller = new RegisterController($authorsTable);
-			$page = $controller->showForm();
-		}
-
-		return $page;
-	}
-
 	public function run() {
 
-		$page = $this->callAction();
+		$page = $this->routes->callAction($this->route);
 
 		$title = $page['title'];
 
