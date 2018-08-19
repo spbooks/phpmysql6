@@ -29,7 +29,7 @@ class Joke {
 		}
 
 
-		$title = 'Joke list';
+		$title = '유머글 목';
 
 		$totalJokes = $this->jokesTable->total();
 
@@ -43,7 +43,7 @@ class Joke {
 	}
 
 	public function home() {
-		$title = 'Internet Joke Database';
+		$title = '인터넷 유머 데이터베이스';
 
 		return ['template' => 'home.html.php', 'title' => $title];
 	}
@@ -69,7 +69,7 @@ class Joke {
 			$joke = $this->jokesTable->findById($_GET['id']);
 		}
 
-		$title = 'Edit joke';
+		$title = '유머글 수정';
 
 		return ['template' => 'editjoke.html.php',
 				'title' => $title,
