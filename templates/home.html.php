@@ -1,3 +1,3 @@
-<h2>Internet Joke Database</h2>
+<h2>인터넷 유머 세상</h2>
 
-<p>Welcome to the Internet Joke Database</p>
+<p>인터넷 유머 세상에 오신 것을 환영합니다</p>
